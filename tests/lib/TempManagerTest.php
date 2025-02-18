@@ -159,11 +159,11 @@ class TempManagerTest extends \Test\TestCase {
 		$logger = $this->createMock(LoggerInterface::class);
 		$tmpManager = self::invokePrivate(
 			$this->getManager($logger),
-			'buildFileNameWithSuffix',
-			['/tmp/myTemporaryFile', 'postfix']
+			'generateTemporaryPath',
+			['postfix']
 		);
 
-		$this->assertEquals('/tmp/myTemporaryFile-.postfix', $tmpManager);
+		$this->assertStringEndsWith('.postfix', $tmpManager);
 	}
 
 	public function testBuildFileNameWithoutPostfix() {
